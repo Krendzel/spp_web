@@ -22,10 +22,20 @@ class LoginCreatorController extends Controller
     }
 
     public function update($id){
+        request()->validate([
+            'first_name' => 'required|min:3|max:20',
+            'last_name' => 'required|min:3|max:20',
+            'login' => 'required|min:3|max:10',
+            'password'=> 'required|min:3|max:10',
+        ]);
+
         $login_creator = LoginCreator::find($id);
 
         $login_creator->first_name = request('first_name');
-        $login_creator->first_name = request('first_name');
+        $login_creator->last_name = request('last_name');
+        $login_creator->save();
+
+        return redirect('/spp/login-creator');
     }
 
     public function test(Request $request){
