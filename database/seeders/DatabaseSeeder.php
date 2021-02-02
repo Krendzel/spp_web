@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\GroupEcom::factory(10)->create();
         \App\Models\GroupEcomOrders::factory(100)->create();
+        \App\Models\LoginCreator::factory(15)->create();
         // \App\Models\User::factory(10)->create();
     }
 }

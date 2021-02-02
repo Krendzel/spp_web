@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\GroupEcomController;
+
+use App\Http\Controllers\LoginCreatorController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -16,5 +18,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/spp', [GroupEcomController::class, 'index']);
-Route::get('/spp/pallet/{id}', [GroupEcomController::class, 'details']);
+
+
+Route::prefix('spp')->group(function () {
+    Route::get('/', [GroupEcomController::class, 'index']);
+    Route::get('/pallet/{id}', [GroupEcomController::class, 'details']);
+    Route::get('/login-creator', [LoginCreatorController::class, 'index']);
+    Route::post('/login-creator/test/', [LoginCreatorController::class, 'test'])->name('list.users');
+    Route::get('/login-creator/{id}/edit', [LoginCreatorController::class, 'edit']);
+    Route::put('/login-creator/{id}', [LoginCreatorController::class, 'update']);
+});
